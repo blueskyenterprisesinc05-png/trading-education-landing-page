@@ -64,7 +64,7 @@ export default function Page() {
     <main>
       <nav className="nav shell"><a className="wordmark" href="#top">{brand.name}<span>.</span></a><CommunityLink className="nav-cta" /></nav>
       <section id="top" className="hero shell section-grid">
-        <div className="hero-copy"><p className="eyebrow"><span className="eyebrow-mark" /> LIQUIDITY <b>•</b> STRUCTURE <b>•</b> DISCIPLINE</p><h1>Price moves.<br /><em>Structure</em> explains why.</h1><p className="lede">Learn to study liquidity, market structure, and reaction with a clearer framework, alongside traders who value process over predictions.</p><CommunityLink className="primary-cta" /><p className="micro"><Send aria-hidden="true" /> Join our community on Telegram.</p></div>
+        <div className="hero-copy"><h1>What if you&apos;ve been making trading <em>harder than it needs to be?</em></h1><p className="lede">Explore a liquidity-based framework for understanding price movement, market structure, and the reasoning behind trading decisions.</p><CommunityLink className="primary-cta" /><p className="micro"><Send aria-hidden="true" /> Join our community on Telegram.</p></div>
         <div className="hero-visual"><LiquidityMap /><div className="visual-note"><span>01</span><p>Read the relationship<br />between levels and reaction.</p></div></div>
       </section>
 

@@ -50,7 +50,16 @@ function LiquidityMap({ compact = false }: { compact?: boolean }) {
 
 export default function Page() {
   const [sticky, setSticky] = useState(false)
-  useEffect(() => { const onScroll = () => setSticky(window.scrollY > 620); window.addEventListener('scroll', onScroll, { passive: true }); return () => window.removeEventListener('scroll', onScroll) }, [])
+  const [finalCtaVisible, setFinalCtaVisible] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setSticky(window.scrollY > 620)
+    const finalCta = document.querySelector('.final-cta')
+    const observer = finalCta ? new IntersectionObserver(([entry]) => setFinalCtaVisible(entry.isIntersecting), { threshold: 0.15 }) : null
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    if (finalCta && observer) observer.observe(finalCta)
+    return () => { window.removeEventListener('scroll', onScroll); observer?.disconnect() }
+  }, [])
   return (
     <main>
       <nav className="nav shell"><a className="wordmark" href="#top">{brand.name}<span>.</span></a><CommunityLink className="nav-cta" /></nav>
@@ -69,7 +78,7 @@ export default function Page() {
 
       <section className="final-cta shell"><div className="final-rule" /><p className="eyebrow">START WITH A BETTER QUESTION</p><h2>Ready to see the market<br /><em>from another perspective?</em></h2><p>Explore liquidity, understand market structure, and connect with a community focused on disciplined learning.</p><CommunityLink className="primary-cta" /></section>
       <footer className="footer shell"><a className="wordmark" href="#top">{brand.name}<span>.</span></a><p>Clarity over noise.<br />Process over predictions.</p><p className="risk">Trading involves substantial risk and potential financial loss. Content is educational and does not constitute personalized investment advice. Past performance does not guarantee future results.</p><span className="copyright">© {new Date().getFullYear()} {brand.name}</span></footer>
-      {sticky && <div className="sticky-cta"><CommunityLink className="primary-cta" /></div>}
+      {sticky && !finalCtaVisible && <div className="sticky-cta"><CommunityLink className="primary-cta" /></div>}
     </main>
   )
 }
